@@ -1,0 +1,54 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 500,
+    "title": "Median Income of Greater Melbourne LGAs",
+        "data": {
+          "url": "https://raw.githubusercontent.com/LSteele15/Homework_9/main/vic_select_test.json",
+          "format": {"type": "topojson", "feature": "vic_lga"}
+        },
+        "projection": {"type": "mercator"},
+        "layer": [
+          {
+          "transform": [
+            {"calculate": "'Data is not available in ' + datum.properties.ABB_NAME", "as": "note"}
+        ],
+        "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"},
+        "encoding": {
+          "tooltip": {
+            "field": "note"
+          }
+        }
+      },
+      {
+        "transform": [
+          {
+            "lookup": "properties.ABB_NAME",
+            "from": {
+              "data": {
+                "url": "https://raw.githubusercontent.com/LSteele15/Homework_9/main/Vic_LGA_data_gen.csv"
+              },
+              "key": "LGA NAME",
+              "fields": ["Median Income"]
+            }
+          }
+        ],
+        "mark": {"type": "geoshape"},
+        "encoding": {
+          "color": {
+            "field": "Median Income",
+            "type": "quantitative",
+            "scale": {
+              "type": "threshold",
+              "domain": [39000, 41000, 43000, 44000, 45500, 46500, 50000],
+              "range": ["#b10026","#e31a1c","#fc4e2a","#fd8d3c","#feb24c","#fed976","#ffffb2"]
+            }
+          },
+          "tooltip": [
+            {"field": "properties.ABB_NAME", "type": "nominal", "title": "LGA NAME"},
+            {"field": "Median Income", "type": "quantitative"}
+          ]
+        }
+      }
+    ]
+  }
