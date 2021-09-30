@@ -29,14 +29,14 @@
                 "url": "https://raw.githubusercontent.com/LSteele15/Homework_9/main/Vic_LGA_data_gen.csv"
               },
               "key": "LGA NAME",
-              "fields": ["Median Income"]
+              "fields": ["Median Income ($)"]
             }
           }
         ],
         "mark": {"type": "geoshape"},
         "encoding": {
           "color": {
-            "field": "Median Income",
+            "field": "Median Income ($)",
             "type": "quantitative",
             "scale": {
               "type": "threshold",
@@ -46,7 +46,7 @@
           },
           "tooltip": [
             {"field": "properties.ABB_NAME", "type": "nominal", "title": "LGA NAME"},
-            {"field": "Median Income", "type": "quantitative"}
+            {"field": "Median Income ($)", "type": "quantitative"}
           ]
         }
       }
